@@ -3,7 +3,7 @@ import csv
 import pandas as pd
 import xlsxwriter
 from dask import dataframe as df1
-#test-access-db
+
 def type_previw(name, true_types:bool):
     for filename in glob.glob(name + "/*.csv"):
         if (true_types):
@@ -44,17 +44,15 @@ def excel_process(name, list):
 
         # print(categories)
 
-        index_chosen, column_chosen, value_chosen = [], [], []
+        index_chosen, column_chosen,  = [], []
+        value_chosen = [4]
 
-        
         for data in list:
             # print(data)
             if (data[1] == 0):
                 index_chosen.append(data[0])
             if (data[1] == 1):
                 column_chosen.append(data[0])
-
-        value_chosen = [4]
 
         index_arr, column_arr, value_arr = [], [], []
         
@@ -89,16 +87,3 @@ def excel_process(name, list):
             save.to_excel(writer, sheet_name='Отчет')
             writer.sheets['Отчет'].set_column(0, 1, 25)
         return True
-
-
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
-    
-if __name__ == "__main__":
-    excel_process('DKR', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])
-    # type_previw("DKR")
-    # first_row_previw("DKR")
